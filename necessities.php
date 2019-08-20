@@ -1,3 +1,4 @@
+<?php
 //Edited by rezker (http://www.rezker.com)
 //Kristi: Added Kosovo
 function code_to_country( $code ){
@@ -317,3 +318,4 @@ $message =
 </body>
 </html>'
 ;
+?>
