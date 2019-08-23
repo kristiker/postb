@@ -252,6 +252,7 @@ $countryList = array(
 );
 function code_to_country( $code ){
             //$code = strtoupper($code);
+            global $countryList;
             if( !$countryList[$code] ) return $code;
             else return $countryList[$code];
 }
