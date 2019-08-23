@@ -48,10 +48,39 @@ else
     $ipdetails = '';
 }
 
-if(empty($country))
+if(!isset($countryList[$country])) // 'UNITED STATES' or ''
 {
-    empty($ipdetails) ? $country = 'XK' : $country = $cache['country'];
-} 
+    if(empty($country)) // ''
+    {
+        if(!empty($ipdetails))
+        {
+            $country = $cache['country'];
+            
+            $shteti = code_to_country($cache['country']);
+        }
+        else
+        {
+            $shteti = 'Antarktida';
+        }
+    }
+    else // 'UNITED STATES'
+    {
+        if(!empty($ipdetails))
+        {
+            $country = $cache['country'];
+            
+            $shteti = code_to_country($cache['country']);
+        }
+        else
+        {
+            $shteti = $country;
+        }
+    }
+}
+else
+{
+     $shteti = code_to_country($country);
+}
 
 if(isset($_REQUEST['to']))
 {
@@ -66,7 +95,6 @@ $token = '<telegram_bot_token>';
 // hardcoded myself for easy &to=k(risti)
 $to[0] == 'k' ? $chatid = <owner_telegram_id> : $chatid = $to;
 
-$shteti = code_to_country($country);
 switch($network)
 {
     
@@ -74,7 +102,7 @@ switch($network)
         $msg = "---------------\n*\$$amount* nga $shteti\nRegjist:  $hit_time\nKonfirm:  $sale_time\nIP:  $ip\nAdresa  $ipdetails\nTracker  $tracker\n---------------"; //Tracker: $tracker\ns1: $s1\ns2: $s2";
         break;
     case 'crak':
-        $msg = "*[ \$$amount ]* nga $country - $goal_id\n$offer\nKoha $time2 @ $date2\nIP: $ip\nAdresa $ipdetails";
+        $msg = "*[ \$$amount ]* nga $shteti - $goal_id\n$offer\nKoha $time2 @ $date2\nIP: $ip\nAdresa $ipdetails";
         break;
     case 'imo':
         $msg = "*\$$amount* nga $shteti"; // *$2* nga Anglia"
