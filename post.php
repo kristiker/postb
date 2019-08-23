@@ -48,6 +48,8 @@ else
     $ipdetails = '';
 }
 
+$country = strtoupper($country);
+
 if(!isset($countryList[$country])) // 'UNITED STATES' or ''
 {
     if(empty($country)) // ''
