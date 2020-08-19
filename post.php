@@ -2,6 +2,10 @@
 
 include 'p_include.php';
 
+// 
+$ipinfo_token = '';
+$telegram_bot_token = '';
+
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 if (  !array_key_exists('n', $_REQUEST)
@@ -94,8 +98,8 @@ $reallysend = !array_key_exists('dont', $_REQUEST);
     
 $token = '<telegram_bot_token>';
 
-// hardcoded myself for easy &to=k(risti)
-$to[0] == 'k' ? $chatid = <owner_telegram_id> : $chatid = $to;
+// hardcoded owner
+$to[0] == 'k' ? $chatid = '<owner_telegram_id>' : $chatid = $to;
 
 switch($network)
 {
