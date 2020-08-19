@@ -38,8 +38,7 @@ if(isset($_REQUEST['tr'       ])) { $tracker   = $_REQUEST['tr'      ]; } else {
 if(isset($_REQUEST['s1'       ])) { $s1        = $_REQUEST['s1'      ]; } else { $s1        = ''; }
 if(isset($_REQUEST['s2'       ])) { $s2        = $_REQUEST['s2'      ]; } else { $s2        = ''; }
 
-
-$userip = getUserIP();
+$userip = $_SERVER['REMOTE_ADDR'];
 
 if(!empty($ip))
 {
