@@ -1,6 +1,4 @@
 <?php
-//Edited by rezker (http://www.rezker.com)
-//Kristi: Added Kosovo
 $countryList = array(
 'AF' => 'Afghanistan',
 'AX' => 'Aland Islands',
@@ -120,6 +118,7 @@ $countryList = array(
 'KI' => 'Kiribati',
 'KP' => 'Korea',
 'KR' => 'Korea',
+'XK' => 'Kosovo'
 'KW' => 'Kuwait',
 'KG' => 'Kyrgyz Republic',
 'LA' => 'Lao',
@@ -248,7 +247,6 @@ $countryList = array(
 'YE' => 'Yemen',
 'ZM' => 'Zambia',
 'ZW' => 'Zimbabwe',
-'XK' => 'Kosovo'
 );
 function code_to_country( $code ){
             //$code = strtoupper($code);
@@ -258,7 +256,8 @@ function code_to_country( $code ){
 }
 
 function ip_details($ipp) {
-  $json = file_get_contents("http://ipinfo.io/{$ipp}/json/?token=<your_token>");
+  global $ipinfo_token;
+  $json = file_get_contents("http://ipinfo.io/{$ipp}/json/?token={$ipinfo_token}");
   $details = json_decode($json, true);
   return $details;
 }
@@ -278,59 +277,4 @@ function sendMessage($chatID, $messaggio, $token) {
     curl_close($ch);
     return $result;
 }
-
-// To send HTML mail, the Content-type header must be set
-$headers  = 'MIME-Version: 1.0' . "\r\n";
-$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-// Message
-$message =
-'<html>
-<body>
-<table style="width: 400px;">
-<tbody>
-<tr>
-<td>&nbsp;Country</td>
-<td>&nbsp;'.code_to_country(htmlspecialchars($country)).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;Amount</td>
-<td>&nbsp;$'.htmlspecialchars($amount).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;Hit on</td>
-<td>&nbsp;'.date('M j G:i:s', htmlspecialchars($hit_time)).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;Sale on</td>
-<td>&nbsp;'.date('M j G:i:s', htmlspecialchars($sale_time)).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;IP</td>
-<td>&nbsp;'.htmlspecialchars($ip).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;IP Details</td>
-<td>&nbsp;'.$ipdetails['country'].'&#44;&nbsp;'.$ipdetails['region'].'&#44;&nbsp;'.$ipdetails['city'].'</td>
-</tr>
-<tr style="height: 50px;">
-<td style="width: 111px; height: 23px;">&nbsp;Platfom</td>
-<td style="width: 122px; height: 23px;">&nbsp;'.htmlspecialchars($platform).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;Tracker</td>
-<td>&nbsp;'.htmlspecialchars($tracker).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;s1</td>
-<td>&nbsp;'.htmlspecialchars($s1).'</td>
-</tr>
-<tr style="height: 50px;">
-<td>&nbsp;s2</td>
-<td>&nbsp;'.htmlspecialchars($s2).'</td>
-</tr>
-</tbody>
-</table>
-</body>
-</html>'
-; // not really needed but keeping it here.
 ?>
