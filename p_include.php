@@ -118,7 +118,7 @@ $countryList = array(
 'KI' => 'Kiribati',
 'KP' => 'Korea',
 'KR' => 'Korea',
-'XK' => 'Kosovo'
+'XK' => 'Kosovo',
 'KW' => 'Kuwait',
 'KG' => 'Kyrgyz Republic',
 'LA' => 'Lao',
@@ -246,12 +246,12 @@ $countryList = array(
 'EH' => 'Western Sahara',
 'YE' => 'Yemen',
 'ZM' => 'Zambia',
-'ZW' => 'Zimbabwe',
+'ZW' => 'Zimbabwe'
 );
 function code_to_country( $code ){
             //$code = strtoupper($code);
             global $countryList;
-            if( !$countryList[$code] ) return $code;
+            if( !array_key_exists[$code] ) return $code;
             else return $countryList[$code];
 }
 

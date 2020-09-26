@@ -2,9 +2,9 @@
 
 include 'p_include.php';
 
-// 
 $ipinfo_token = '';
 $telegram_bot_token = '';
+$owner_telegram_id = 0
 
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -13,14 +13,14 @@ if (  !array_key_exists('n', $_REQUEST)
    && !array_key_exists('dont', $_REQUEST))
     {
         // Bye I have no duty here.
-        echo 'Hello Kristi was herre.'; //...
+        echo 'Hello bye...';
         die();
     }
 
-header('Content-type: text/html; charset=iso-8859-1');
+// ?n=adv&country={country}&am={amount}&hit={hit_time}&sale={sale_time}&ip={ip}&to=k
 
-if(isset($_REQUEST['hit'      ])) { $hit_time  = date('M j G:i:s', $_REQUEST['hit'     ]); } else { $hit_time  = '0'; }
-if(isset($_REQUEST['sale'     ])) { $sale_time = date('M j G:i:s', $_REQUEST['sale'    ]); } else { $sale_time = '0'; }
+if(isset($_REQUEST['hit'      ])) { $hit_time  = $_REQUEST['hit'     ]; } else { $hit_time  = '0'; }
+if(isset($_REQUEST['sale'     ])) { $sale_time = $_REQUEST['sale'    ]; } else { $sale_time = '0'; }
 
 if(isset($_REQUEST['ip'       ])) { $ip        = $_REQUEST['ip'      ]; } else { $ip        = ''; }
 if(isset($_REQUEST['am'       ])) { $amount    = $_REQUEST['am'      ]; } else { $amount    = '0'; }
@@ -37,6 +37,7 @@ if(isset($_REQUEST['n'/*netw*/])) { $network   = $_REQUEST['n'       ]; } else {
 if(isset($_REQUEST['tr'       ])) { $tracker   = $_REQUEST['tr'      ]; } else { $tracker   = ''; }
 if(isset($_REQUEST['s1'       ])) { $s1        = $_REQUEST['s1'      ]; } else { $s1        = ''; }
 if(isset($_REQUEST['s2'       ])) { $s2        = $_REQUEST['s2'      ]; } else { $s2        = ''; }
+
 
 $userip = $_SERVER['REMOTE_ADDR'];
 
@@ -94,17 +95,15 @@ if(isset($_REQUEST['to']))
 }
 $reallysend = !array_key_exists('dont', $_REQUEST);
 
-    
-$token = '<telegram_bot_token>';
 
-// hardcoded owner
-$to[0] == 'k' ? $chatid = '<owner_telegram_id>' : $chatid = $to;
+// &to=k
+$to[0] == 'k' ? $chatid = $owner_telegram_id : $chatid = $to;
 
 switch($network)
 {
     
     case 'adv': default:
-        $msg = "---------------\n*\$$amount* nga $shteti\nRegjist:  $hit_time\nKonfirm:  $sale_time\nIP:  $ip\nAdresa  $ipdetails\nTracker  $tracker\n---------------"; //Tracker: $tracker\ns1: $s1\ns2: $s2";
+        $msg = "*\$$amount* nga $shteti\nRegjist:  $hit_time\nKonfirm:  $sale_time\nIP:  $ip\nAdresa  $ipdetails\nTracker  $tracker"; //Tracker: $tracker\ns1: $s1\ns2: $s2";
         break;
     case 'crak':
         $msg = "*[ \$$amount ]* nga $shteti - $goal_id\n$offer\nKoha $time2 @ $date2\nIP: $ip\nAdresa $ipdetails";
@@ -120,7 +119,7 @@ switch($network)
 
 if($reallysend)
 {
-    sendMessage($chatid, $msg, $token);
+    sendMessage($chatid, $msg, $telegram_bot_token);
     echo 'Okej';
 }
 else // don't really send - just print
