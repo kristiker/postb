@@ -251,7 +251,7 @@ $countryList = array(
 function code_to_country( $code ){
             //$code = strtoupper($code);
             global $countryList;
-            if( !array_key_exists[$code] ) return $code;
+            if( !array_key_exists($code, $countryList) ) return $code;
             else return $countryList[$code];
 }
 
